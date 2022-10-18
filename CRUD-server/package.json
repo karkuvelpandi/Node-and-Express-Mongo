@@ -1,5 +1,5 @@
 {
-  "name": "16-BigBasket-Application-Backend",
+  "name": "CRUD-server",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
