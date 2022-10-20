@@ -2,6 +2,7 @@ import React from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
 import { Navigate } from 'react-router-dom'
+import Admin from './Admin'
 const CreateProduct = () => {
     let [product, setProduct] = useState({
         name: "",
@@ -39,12 +40,18 @@ const CreateProduct = () => {
             }
         })
 
-    }
-
+      }
+      let editHandler=(singleProduct)=>{
+      
+        setProduct({singleProduct})
+      
+      };
+   
     return <>
         <div className="container mt-5">
             <pre>{JSON.stringify(product)}</pre>
             <pre>{JSON.stringify(submitted)}</pre>
+           {/* <Admin method={editHandler}/> */}
             {
                 submitted ? <><Navigate to='/ListProducts' /></> : <>
                     <div className="row">
