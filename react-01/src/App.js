@@ -4,6 +4,7 @@ import Navbar from './Navbar/Navbar'
 import CreateProduct from './Components/CreateProduct'
 import ListProducts from './Components/ListProducts'
 import Admin from './Components/Admin'
+import Edit from './Components/Edit'
 const App = () => {
   return (
     <>
@@ -13,6 +14,7 @@ const App = () => {
               <Route path='/CreateProduct' element={<CreateProduct />}/>
               <Route path='/ListProducts' element={<ListProducts />}/>
               <Route path='/Admin' element={<Admin />}/>
+              <Route path='/Edit' element={<Edit />}/> 
             </Routes>
         </Router>
     </>

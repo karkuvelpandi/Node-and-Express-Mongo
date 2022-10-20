@@ -31,9 +31,8 @@ const CreateProduct = () => {
 
     let changeImage = (event) => {
         let imageFile = event.target.files[0]
-        let reader = new FileReader()
+        let reader = new FileReader()    
         reader.readAsDataURL(imageFile)
-
         reader.addEventListener("load", () => {
             if (reader.result) {
                 setProduct({ ...product, image: reader.result })
@@ -64,7 +63,7 @@ const CreateProduct = () => {
                                             <input type="text" name="name" placeholder='Product Name' className='form-control' onChange={productData} />
                                         </div>
                                         <div className="form-group">
-                                            <input type="file" name="image" placeholder='Image' className='form-control' onChange={changeImage} />
+                                            <input type="file" name="image" placeholder='Image' height='100px' className='form-control' onChange={changeImage} />
                                         </div>
                                         <div className="form-group">
                                             <input type="number" name="price" placeholder='Price' className='form-control' onChange={productData} />

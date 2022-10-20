@@ -25,8 +25,8 @@ const Admin = (props) => {
         <pre>{JSON.stringify(products)}</pre>
         <div className="row">
           <div className="col-8">
-            <table className='table table-dark mt-5'>
-              <thead >
+            <table className='table table-hover mt-5'>
+              <thead className='bg-dark text-white'>
                 <tr>
                   <th>Product Name</th>
                   <th>Product Price</th>
@@ -46,8 +46,9 @@ const Admin = (props) => {
                           <td>{product.price}</td>
                           <td>{product.qty}</td>
                           <td>{(product.qty) * (product.price)}</td>
-                          <td>{product.image}</td>
-                          <td><Link to="/CreateProduct" /* onDoubleClick={props.method.bind(this,product._id)} */ className='btn btn-success'>Edit</Link ><Link  className='btn btn-danger' onClick={deleteProduct.bind(this, product._id)}>Delete</Link ></td>
+                          <td><img height='80pc' width='70pc' src={product.image} alt="" /></td>
+                          <td><Link to="/Edit"  className='btn btn-success'>Edit</Link >&nbsp;
+                          <Link  className='btn btn-danger' onClick={deleteProduct.bind(this, product._id)}>Delete</Link ></td>
                         </tr>
                       })
                     }
