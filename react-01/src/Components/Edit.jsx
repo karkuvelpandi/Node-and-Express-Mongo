@@ -3,9 +3,9 @@ import { useState } from 'react'
 import Axios from 'axios'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
+import Admin from './Admin'
 const Edit = () => {
-  
-    let [productID, setProductId] = useState(useParams().id)
+    let [productID, setProductId] = useState()
     let [selectedproduct, setSelectedProduct] = useState({
         name: "",
         image: "",
@@ -15,6 +15,9 @@ const Edit = () => {
     })
     let [submitted, setSubmitted] = useState(false)
 
+   let setID=(id)=>{
+   setProductId(id)
+   }; 
     useEffect(() => {
         let url = `http://127.0.0.1:5000/api/products/${productID}`
        Axios.get(url).then((response)=>{
@@ -35,7 +38,7 @@ const Edit = () => {
      let submitHandler = (event) => {
         event.preventDefault();
         let url = `http://127.0.0.1:5000/api/products/${productID}`
-        Axios.post(url, selectedproduct).then((res) => {
+        Axios.post(url).then((res) => {
             setSubmitted(true)
         }).catch(() => { })
     }
@@ -58,6 +61,8 @@ const Edit = () => {
         <div className="container mt-5">
             <pre>{JSON.stringify(selectedproduct)}</pre>
             <pre>{JSON.stringify(submitted)}</pre>
+            <pre>{JSON.stringify(productID)}</pre>
+            <Admin method={setID}/>
             
             {
                 submitted ? <><Navigate to='/Admin' /></> : <>
