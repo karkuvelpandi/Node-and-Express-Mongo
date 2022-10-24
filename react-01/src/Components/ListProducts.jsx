@@ -5,11 +5,11 @@ import Axios from 'axios'
 
 const ListProducts = () => {
   let [products,setProducts] = useState([])
-
+let [err,setErr] =useState("")
   useEffect(()=>{
     Axios.get("http://127.0.0.1:5000/api/products").then((res)=>{
       setProducts(res.data)
-    }).catch(()=>{})
+    }).catch((er)=>{setErr(er)})
   },[])
   return <>
   <div className="container mt-5">
@@ -34,7 +34,7 @@ const ListProducts = () => {
               </div>
             })
           }
-          </> : <h1>No Products are created</h1>
+          </> : <>No Products are created</>
         }
       </div>
   </div>

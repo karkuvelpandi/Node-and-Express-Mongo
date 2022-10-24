@@ -3,31 +3,29 @@ import { useState, useEffect } from 'react'
 import Axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
-const Admin = (props) => {
- let navigate=useNavigate();
+const Admin = () => {
+  let navigate = useNavigate();
   let [products, setProducts] = useState([])
-  
+   let[errorMsg,setErrorMsg]=useState("")
 
   useEffect(() => {
     Axios.get("http://127.0.0.1:5000/api/products").then((res) => {
       setProducts(res.data)
-    }).catch(() => { })
+    }).catch((err) => { setErrorMsg(err)})
   }, [])
 
- let selcetedID=(id)=>{
-    props.method(id)
-  }
+  
   let deleteProduct = (id) => {
     Axios.delete(`http://127.0.0.1:5000/api/products/${id}`)
       .then((resp) => {
         navigate(0)
-      }).catch(() => { })
+      }).catch((err) => { setErrorMsg(err)})
   };
   return (
     <>
       <div className="container mt-5">
         <pre>{JSON.stringify(products)}</pre>
-      
+
         <div className="row">
           <div className="col-8">
             <table className='table table-hover mt-5'>
@@ -52,11 +50,11 @@ const Admin = (props) => {
                           <td>{product.qty}</td>
                           <td>{(product.qty) * (product.price)}</td>
                           <td><img height='80pc' width='70pc' src={product.image} alt="" /></td>
-                          <td><Link to="/Edit" onClick={selcetedID.bind(this,product._id)}  className='btn btn-success'>Edit</Link >&nbsp;
-                          <Link  className='btn btn-danger' onClick={deleteProduct.bind(this, product._id)}>Delete</Link ></td>
-                         
+                          <td><Link to={`/Edit/${product._id}`} className='btn btn-success'>Edit</Link >&nbsp;
+                            <Link className='btn btn-danger' onClick={deleteProduct.bind(this, product._id)}>Delete</Link ></td>
+
                         </tr>
-                        
+
                       })
                     }
                   </> : null

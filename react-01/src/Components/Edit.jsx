@@ -5,7 +5,7 @@ import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
 import Admin from './Admin'
 const Edit = () => {
-    let [productID, setProductId] = useState()
+    let [productID, setProductId] = useState(useParams().id)
     let [selectedproduct, setSelectedProduct] = useState({
         name: "",
         image: "",
@@ -14,7 +14,7 @@ const Edit = () => {
         info: ""
     })
     let [submitted, setSubmitted] = useState(false)
-
+let [errorMsg,setErrorMsg]=useState("")
    let setID=(id)=>{
    setProductId(id)
    }; 
@@ -22,7 +22,7 @@ const Edit = () => {
         let url = `http://127.0.0.1:5000/api/products/${productID}`
        Axios.get(url).then((response)=>{
           setSelectedProduct(response.data)
-       }).catch(()=>{})
+       }).catch((err)=>{setErrorMsg(err)})
 
     }, [productID])
 
@@ -33,15 +33,7 @@ const Edit = () => {
         })
     }
 
-
-
-     let submitHandler = (event) => {
-        event.preventDefault();
-        let url = `http://127.0.0.1:5000/api/products/${productID}`
-        Axios.post(url).then((res) => {
-            setSubmitted(true)
-        }).catch(() => { })
-    }
+    //Change image to string
 
     let changeImage = (event) => {
         let imageFile = event.target.files[0]
@@ -57,13 +49,23 @@ const Edit = () => {
     } 
 
 
+     let submitHandler = (event) => {
+        event.preventDefault();
+        let dataURL = `http://127.0.0.1:5000/api/products/${productID}`
+        Axios.put(dataURL,selectedproduct).then((res) => {
+        
+            setSubmitted(true)
+        }).catch((err) => {setErrorMsg(err) })
+    }
+
+    
+
+
     return <>
         <div className="container mt-5">
             <pre>{JSON.stringify(selectedproduct)}</pre>
             <pre>{JSON.stringify(submitted)}</pre>
-            <pre>{JSON.stringify(productID)}</pre>
-            <Admin method={setID}/>
-            
+            <pre>{JSON.stringify(productID)}</pre> 
             {
                 submitted ? <><Navigate to='/Admin' /></> : <>
                     <div className="row">
