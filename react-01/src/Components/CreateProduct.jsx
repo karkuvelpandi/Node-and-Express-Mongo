@@ -31,15 +31,19 @@ const CreateProduct = () => {
 
     let changeImage = (event) => {
         let imageFile = event.target.files[0]
+    
         let reader = new FileReader()    
+        
         reader.readAsDataURL(imageFile)
+
         reader.addEventListener("load", () => {
             if (reader.result) {
+               /*  console.log(reader.result) */
                 setProduct({ ...product, image: reader.result })
             }
         })
 
-      }
+    }
    
    
     return <>

@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Axios from 'axios'
 import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import { useEffect } from 'react'
-import Admin from './Admin'
+
 const Edit = () => {
     let [productID, setProductId] = useState(useParams().id)
     let [selectedproduct, setSelectedProduct] = useState({
@@ -45,11 +45,10 @@ let [errorMsg,setErrorMsg]=useState("")
                 setSelectedProduct({ ...selectedproduct, image: reader.result })
             }
         })
-
     } 
 
 
-     let submitHandler = (event) => {
+let submitHandler = (event) => {
         event.preventDefault();
         let dataURL = `http://127.0.0.1:5000/api/products/${productID}`
         Axios.put(dataURL,selectedproduct).then((res) => {
@@ -57,9 +56,6 @@ let [errorMsg,setErrorMsg]=useState("")
             setSubmitted(true)
         }).catch((err) => {setErrorMsg(err) })
     }
-
-    
-
 
     return <>
         <div className="container mt-5">
