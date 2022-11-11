@@ -24,20 +24,20 @@ let deleteProduct=(id)=>{
   return <>
      <div className="container">
       <pre>{JSON.stringify(products)}</pre>
-      <div className="col-md-7">
+     <center><div className="col-md-8 ">
         <div className="row mt-5">
-          <table className="table table-striped table-dark text-white">
+          <table className="table table-hover bg-light">
             <thead>
                 <tr>
-                  <td>Name</td>
-                  <td>Price</td>
-                  <td>Qty</td>
-                  <td>Total</td>
-                  <td>Image</td>
-                  <td>Modify</td>
+                  <th>Name</th>
+                  <th>Price</th>
+                  <th>Qty</th>
+                  <th>Total</th>
+                  <th>Image</th>
+                  <th>Modify</th>
                 </tr>
             </thead>
-            <tbody className='text-white'>
+            <tbody >
               {
                 products.length>0?<>
                 {
@@ -58,7 +58,7 @@ let deleteProduct=(id)=>{
             </tbody>
           </table>
         </div>
-      </div>
+      </div></center> 
      </div>
     </>
   

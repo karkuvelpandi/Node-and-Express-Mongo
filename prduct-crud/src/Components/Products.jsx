@@ -25,14 +25,14 @@ const Products = () => {
                 return <div className="col-md-3">
                        <div className="card mt-5">
                       <div className="card-header">
-                       <center> <img src={product.image} width="150px" height="150px" alt="No pic" /></center>
+                       <center> <img id="img" src={product.image} width="150px" height="150px" alt="No pic" /></center>
                       </div>
                       <div className="card-body">
                         <ul className="list-group">
-                          <li className="list-group-item">Name:{product.name}</li>
-                          <li className="list-group-item">Price:{product.price}</li>
-                          <li className="list-group-item">Qty:{product.qty}</li>
-                          <li className="list-group-item">Total:{product.qty * product.price}</li>
+                          <li className="list-group-item" >Name:{product.name}</li>
+                          <li className="list-group-item" >Price:{product.price}</li>
+                          <li className="list-group-item" >Qty:{product.qty}</li>
+                          <li className="list-group-item" >Total:{product.qty * product.price}</li>
                         </ul>
                       </div>
                     </div>
