@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-import {Link,useNavigate}from 'react-router-dom'
+import {Link,useNavigate,Navigate}from 'react-router-dom'
 
 const Admin = () => {
 let[products,setProducts]= useState({})
@@ -48,7 +48,7 @@ let deleteProduct=(id)=>{
                     <td>{product.qty}</td>
                     <td>{(product.qty)*(product.price)}</td>
                     <td><img src={product.image} height="100px" width="100px" alt="no pic" /></td>
-                    <td><Link className="btn btn-primary">Edit</Link><Link className="btn btn-danger" onClick={deleteProduct.bind(this,product.id)}>Delete</Link></td>
+                    <td><Link to={`/edit/${product.id}`} className="btn btn-primary">Edit</Link><Link className="btn btn-danger" onClick={deleteProduct.bind(this,product.id)}>Delete</Link></td>
                   </tr>
                   })
                 }
