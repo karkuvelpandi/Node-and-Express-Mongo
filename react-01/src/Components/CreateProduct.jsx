@@ -12,6 +12,7 @@ const CreateProduct = () => {
         info: ""
     })
     let [submitted, setSubmitted] = useState(false)
+    
 
     let productData = (event) => {
         setProduct({
@@ -23,10 +24,12 @@ const CreateProduct = () => {
 
     let submitHandler = (event) => {
         event.preventDefault();
-        let url = "http://127.0.0.1:5000/api/products/"
-        Axios.post(url, product).then((res) => {
+        let url = localStorage. setItem("LocalDataList",product);
+        setSubmitted(true)
+       /*  Axios.post(url, product).then((res) => {
             setSubmitted(true)
-        }).catch(() => { })
+        }).catch(() => { }) */
+        console.log(url)
     }
 
     let changeImage = (event) => {
