@@ -4,6 +4,7 @@ import Axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 
 const Admin = () => {
+
   let navigate = useNavigate();
   let [products, setProducts] = useState([])
    let[errorMsg,setErrorMsg]=useState("")
