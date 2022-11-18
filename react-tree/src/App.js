@@ -1,9 +1,9 @@
 import React from 'react'
-import Os from './Os/Os'
+import System from './System/System'
 const App = () => {
   return (
    <>
-    <Os />
+    <System />
    </>
   )
 }
