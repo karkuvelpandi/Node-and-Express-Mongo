@@ -12,11 +12,8 @@ let getDate=(event)=>{
   console.log(event)
   setPlatform({...Platform,plat:event.view.clientInformation.platform,os:event.view.clientInformation.userAgentData.platform,browser:event.view.clientInformation.userAgentData.brands[0]}) 
 }
-useEffect(()=>{
-     console.log();
-},[])
    
-    return <>
+return <>
     <div className="container mt-5">
         <div className="row">
             <div className="col-md-4">
@@ -32,7 +29,6 @@ useEffect(()=>{
                     </ul>
                     <button onClick={getDate} className="btn btn-dark mt-2">Click to fetch</button>
                     </div>
-                   
                 </div>
             </div>
         </div>
