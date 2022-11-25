@@ -1,0 +1,13 @@
+Local-Server creation
+
+//create One folder for server (example : Local-server)
+
+>cd folder (where you want to create-server)
+
+>npm init --yes
+
+>npm i json-server -g
+
+// create json file inside the server folder itself (example : task.json / products.json)
+
+>json-server --watch task.json (your json file name)
