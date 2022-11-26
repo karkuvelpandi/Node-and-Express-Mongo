@@ -6,10 +6,10 @@ Local-Server creation
 
 >npm init --yes
 
+>npm i json-server -g
+
 >npm i json-server
 
 // create json file inside the server folder itself (example : task.json / products.json)
 
 >json-server --watch task.json (your json file name)
-
-// at last add one .gitignore file inside the server folder for node modules

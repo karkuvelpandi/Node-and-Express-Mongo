@@ -3,7 +3,7 @@ import Navbar from './Navbar/Navbar'
 import CreateProduct from './Components/CreateProduct'
 import Products from './Components/Products'
 import Admin from './Components/Admin'
-import Home from './Components/Home/Home'
+import Home from './pages/Home/Home'
 import Edit from './Components/Edit'
 import {BrowserRouter as Router, Routes, Route} from 'react-router-dom'
 import "./App.css"
