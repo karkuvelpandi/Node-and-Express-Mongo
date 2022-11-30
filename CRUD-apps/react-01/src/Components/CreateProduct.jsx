@@ -24,11 +24,11 @@ const CreateProduct = () => {
 
     let submitHandler = (event) => {
         event.preventDefault();
-        let url = localStorage. setItem("LocalDataList",product);
+        let url ="http://127.0.0.1:5000/api/products" 
         setSubmitted(true)
-       /*  Axios.post(url, product).then((res) => {
+        Axios.post(url, product).then((res) => {
             setSubmitted(true)
-        }).catch(() => { }) */
+        }).catch(() => { }) 
         console.log(url)
     }
 
