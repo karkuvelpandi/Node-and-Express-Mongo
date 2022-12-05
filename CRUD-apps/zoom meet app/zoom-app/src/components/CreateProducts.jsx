@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Axios from 'axios'
-import {Navigate} from "react-router-dom"
+// import {Navigate} from "react-router-dom"
+
 let CreateProducts = () => {
     let [product, setProduct] = useState({
         name: "",
@@ -9,7 +10,8 @@ let CreateProducts = () => {
         qty: "",
         info: ""
     })
-    let [submitted, setSubmitted]=useState(false)
+    
+    // let [submitted, setSubmitted]=useState(false)
 
     let getData = (event) => {
         setProduct({ ...product, [event.target.name]: event.target.value })
@@ -19,7 +21,7 @@ let CreateProducts = () => {
         let url = "http://localhost:3000/products"
         Axios.post(url, product)
             .then(() => {
-               setSubmitted(true)
+            //    setSubmitted(true)
             })
             .catch(() => { })
 
@@ -39,11 +41,10 @@ let CreateProducts = () => {
     }
     return <>
         <pre>{JSON.stringify(product)}</pre>
-        <pre>{JSON.stringify(submitted)}</pre>
+        {/* <pre>{JSON.stringify(submitted)}</pre> */}
         <h1>Create Product</h1>
-        {
-            submitted ? <Navigate to="/productlist"/> :
-            <div className="container">
+        {/* { submitted ? <Navigate to="/productlist"/> : } */}
+        <div className="container">
             <div className="row">
                 <div className="col-md-6">
                     <div className="card">
@@ -74,7 +75,6 @@ let CreateProducts = () => {
                 </div>
             </div>
         </div>
-        }
         
     </>
 }
