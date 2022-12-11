@@ -10,6 +10,10 @@ router.get('/user',(request,response)=>{
    response.send('<h1>Getting single data successfully with ES6...</h1>')
 })
 
+router.post('/user',(request,response)=>{
+   response.send('<h1>Posting single data successfully with ES6...</h1>')
+})
+
 router.get('/users',(request,response)=>{
    response.send("Getting all data successfully...")
 })
