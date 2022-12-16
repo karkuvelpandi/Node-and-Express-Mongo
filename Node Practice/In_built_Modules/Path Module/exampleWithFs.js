@@ -6,3 +6,4 @@ fs.readFile(path.join(__dirname,'files','JSON','emp.json'),"utf-8",(err,data)=>{
             // console.log(data);               //not a correct way to read JSON files
                console.log(JSON.parse(data));
 }) 
+

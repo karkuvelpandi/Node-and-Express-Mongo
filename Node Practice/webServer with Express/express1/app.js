@@ -1,6 +1,9 @@
-const express =require("express")
+const express =require("express")//nodejs web framework which is easiest way to create server
+const app=express()   //its a concise code of http module
 
-const app=express()
+// const http=require("http")   
+// let server=http.createServer()
+
 /*
 API URL:localhost:8080
 Method: GET
