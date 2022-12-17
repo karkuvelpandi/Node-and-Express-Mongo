@@ -23,7 +23,7 @@ mongoose.connect(mongo_url)
 
 //HTTP logger
 app.use(morgan('tiny'))
-//to enable the client access point we giv the cross origin resource sharing nothing but CORS
+//to enable the client access point we give the cross origin resource sharing nothing but CORS
 app.use(cors()) 
 
 //how to read form data we have to use express.json()

@@ -1,6 +1,6 @@
 import express from 'express'
 import Product from '../model/Product.js'
-let router=express.Router()
+const router=express.Router()
 
 /*
 URL: localhost:8000/product/create
