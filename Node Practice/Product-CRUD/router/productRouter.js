@@ -1,7 +1,15 @@
 import express from 'express'
 import Product from '../model/Product.js'
 const router=express.Router()
-
+/*
+URL: localhost:8000/product/create
+Method:POST
+Req fields:name,price,qty
+*/
+router.get('/',async(req,resp)=>{
+      let product=await Product.find()
+      resp.status(200).json(product)
+})
 /*
 URL: localhost:8000/product/create
 Method:POST
@@ -43,6 +51,7 @@ router.post('/create', async(request,response)=>{
     }
 
 })
+
 // router.put()
 // router.delete()
 export default router
