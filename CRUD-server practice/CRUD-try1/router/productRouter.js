@@ -4,8 +4,8 @@ const router = express.Router()
 
 /*
 URL : http://127.45.12.78/7000/product
-method: POST
-required fields: name,price,qty
+method: GET
+required fields: NO
 */
 router.get('/', async (request, response) => {
     try {
@@ -20,7 +20,7 @@ router.get('/', async (request, response) => {
 })
 
 /*
-URL : http://127.45.12.78/7000/product
+URL : http://127.45.12.78/7000/product/create
 method: POST
 required fields: name,price,qty
 */
@@ -54,40 +54,76 @@ router.post('/create', async (request, response) => {
 })
 
 /*
-URL : http://127.45.12.78/7000/product
-method: POST
+URL : http://127.45.12.78/7000/product/update/:id
+method: PUT
 required fields: name,price,qty
 */
-router.put("/:id", (req, resp) => {
+router.put("/update/:id", async(req, resp) => {
     let product_id=req.params.id
     console.log(product_id);
     try{
         let updatedProduct = {
-            name: {
-                type: String,
-                required: true
-            },
-            price: {
-                type: Number,
-                required: true
-            },
-            qty:{
-                type:Number,
-                required:true
-            }
+           name: req.body.name,
+           price:req.body.price,
+           qty:req.body.qty
         }
         let product=Product.findById(product_id)
         if(!product){
-            return resp.status(401).json({
-                msg:"Product not found...!"
-            })
+            return resp.status(401).json({msg:"No product found..."})
         }
+        product= await Product.findByIdAndUpdate(product_id,{ $set: updatedProduct},{new:true})
+        resp.status(200).json({
+            result:"Product updated successfully...",
+            product:product
+        })
     }
     catch(err){
         response.status(401).json({
             msg:err.message
         })
     }
+})
+/*
+URL : http://127.45.12.78/7000/product/delete/:id
+method: DELETE
+required fields: name,price,qty
+*/
+
+router.delete('/delete/:id',async(req,resp)=>{
+       let product_Id=req.params.id
+       try{
+        let product=  Product.findById(product_Id)
+        if(!product){
+            return resp.status(401).json({
+                result:'no product'
+            })
+        }
+        product=await Product.findByIdAndDelete(product_Id)
+        resp.status(200).json({
+            result:"Product deleted successfully...",
+            product:product
+        })
+       }
+       catch(err){if(err)throw err}
+})
+/*
+URL : http://127.45.12.78/7000/product/:id
+method: GET
+required fields: name,price,qty
+*/
+router.get('/:id',async(req,resp)=>{
+    let product_Id=req.params.id
+    try{
+     let product=  Product.findById(product_Id)
+     if(!product){
+         return resp.status(401).json({
+             result:'no product'
+         })
+     }
+     product=await Product.findById(product_Id)
+     resp.status(200).json(product)
+    }
+    catch(err){if(err)throw err}
 })
 
 export default router
