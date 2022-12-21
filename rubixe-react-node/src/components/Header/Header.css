@@ -1,0 +1,15 @@
+.header{
+    background-image: url("../../assets/header-bg.png");
+    height:600px;
+    display: flex;
+    align-items: flex-end;
+    color: whitesmoke;
+    font-size: 2rem;
+}
+.header-content{
+    margin-left: 220px;
+    margin-bottom: 50px;
+}
+.header-img{
+    height: 200px;
+}
