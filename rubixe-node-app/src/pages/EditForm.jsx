@@ -1,10 +1,11 @@
 import { useState } from "react"
 import React from 'react'
 import { useEffect } from "react"
-import { Link } from 'react-router-dom'
-import './RegForm.css'
+import { Link,useParams } from 'react-router-dom'
+import './EditForm.css'
 import Axios from 'axios'
-const RegForm = () => {
+const EditForm = () => {
+  let selectedId =useParams().id
   let [nameErr, setNameErr] = useState(null)
   let [emailErr, setEmailErr] = useState(null)
   let [mobileErr, setMobileErr] = useState(null)
@@ -15,6 +16,7 @@ const RegForm = () => {
   let [imageErr, setImageErr] = useState(null)
   let [valid, setValid] = useState(false)
   let [submitted, setSubmitted] = useState(false)
+  let [selectedUser,setSelectedUser]=useState({})
   let [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
@@ -31,13 +33,20 @@ const RegForm = () => {
   }
 
   useEffect(() => {
+
     if (valid === true) {
       validateFun(userDetails)
     }
+    Axios.get(`http://127.12.22.32:8000/user/${selectedId}`)
+       .then((response)=>{
+          setSelectedUser(response.data)
+      })
+      .catch((err)=>{console.log(err)})
   }, [userDetails])
 
   let submitHandler = (e) => {
     e.preventDefault()
+    validateFun(userDetails)
     setValid(true)
     let submit = validateFun(userDetails)
     if (submit === true) {
@@ -165,35 +174,35 @@ const RegForm = () => {
           <center><h2 className="h1">Registration Form</h2></center>
           <form onSubmit={submitHandler}>
             <div className="form-group">
-              <input type="text" className="form-control" name="name" onChange={getData} placeholder='Name' />
+              <input type="text" className="form-control" value={selectedUser.name} name="name" onChange={getData} placeholder='Name' />
               <h6 className="text-danger">{nameErr}</h6>
             </div>
             <div className="form-group">
-              <input type="text" className="form-control" name="email" onChange={getData} placeholder='E-mail' />
+              <input type="text" className="form-control" value={selectedUser.email} name="email" onChange={getData} placeholder='E-mail' />
               <h6 className="text-danger">{emailErr}</h6>
             </div>
             <div className="form-group">
-              <input type="number" className="form-control" name="mobile" onChange={getData} placeholder='Mobile-Number' />
+              <input type="number" className="form-control" value={selectedUser.mobile} name="mobile" onChange={getData} placeholder='Mobile-Number' />
               <h6 className="text-danger">{mobileErr}</h6>
             </div>
             <div className="form-group">
-              <input type="password" autoComplete="true" className="form-control" name="password" onChange={getData} placeholder='Password' />
+              <input type="password" autoComplete="true" value={selectedUser.password} className="form-control" name="password" onChange={getData} placeholder='Password' />
               <h6 className="text-danger">{passwordErr}</h6>
             </div>
             <div className="form-group">
-              <input type="text" className="form-control" name="state" onChange={getData} placeholder='State' />
+              <input type="text" className="form-control" value={selectedUser.state} name="state" onChange={getData} placeholder='State' />
               <h6 className="text-danger">{stateErr}</h6>
             </div>
             <div className="form-group">
-              <input type="text" className="form-control" name="city" onChange={getData} placeholder='City' />
+              <input type="text" className="form-control" value={selectedUser.city} name="city" onChange={getData} placeholder='City' />
               <h6 className="text-danger">{cityErr}</h6>
             </div>
             <div className="form-group">
-              <textarea className="form-control" name="description" onChange={getData} placeholder='Description' />
+              <textarea className="form-control" value={selectedUser.description} name="description" onChange={getData} placeholder='Description' />
               <h6 className="text-danger">{descriptionErr}</h6>
             </div>
             <div className="form-group">
-              <input type="file" className="form-control" name="image" onChange={changeImage} placeholder='Image' />
+              <input type="file" className="form-control"  name="image" onChange={changeImage} placeholder='Image' /><img src={selectedUser.image} alt="no pic"/>
               <h6 className="text-danger">{imageErr}</h6>
             </div>
             <input type="submit" value="Register" className='btn btn-success' />
@@ -206,4 +215,4 @@ const RegForm = () => {
   </>
 }
 
-export default RegForm
+export default EditForm
