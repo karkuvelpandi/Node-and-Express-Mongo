@@ -1,11 +1,11 @@
-import { useState } from "react"
+import { useId, useState } from "react"
 import React from 'react'
 import { useEffect } from "react"
-import { Link,useParams } from 'react-router-dom'
+import { Link, Navigate, useParams } from 'react-router-dom'
 import './EditForm.css'
 import Axios from 'axios'
 const EditForm = () => {
-  let selectedId =useParams().id
+  let selectedId = useParams().id
   let [nameErr, setNameErr] = useState(null)
   let [emailErr, setEmailErr] = useState(null)
   let [mobileErr, setMobileErr] = useState(null)
@@ -13,11 +13,9 @@ const EditForm = () => {
   let [stateErr, setStateErr] = useState(null)
   let [cityErr, setCityErr] = useState(null)
   let [descriptionErr, setDescriptionErr] = useState(null)
-  let [imageErr, setImageErr] = useState(null)
-  let [valid, setValid] = useState(false)
+  // let [imageErr, setImageErr] = useState(null)
   let [submitted, setSubmitted] = useState(false)
-  let [selectedUser,setSelectedUser]=useState({})
-  let [userDetails, setUserDetails] = useState({
+  let [selectedUser, setSelectedUser] = useState({
     name: "",
     email: "",
     mobile: "",
@@ -25,34 +23,30 @@ const EditForm = () => {
     state: "",
     city: "",
     description: "",
-    image: "",
+    image: ""
   })
 
-  let getData = (event) => {
-    setUserDetails({ ...userDetails, [event.target.name]: event.target.value })
-  }
-
   useEffect(() => {
-
-    if (valid === true) {
-      validateFun(userDetails)
-    }
     Axios.get(`http://127.12.22.32:8000/user/${selectedId}`)
-       .then((response)=>{
-          setSelectedUser(response.data)
+      .then((response) => {
+        setSelectedUser(response.data)
       })
-      .catch((err)=>{console.log(err)})
-  }, [userDetails])
+      .catch((err) => { console.log(err) })
+      
+  }, [selectedId])
+
+  let getData = (event) => {
+    setSelectedUser({ ...selectedUser, [event.target.name]: event.target.value })
+    validateFun(selectedUser)
+  }
 
   let submitHandler = (e) => {
     e.preventDefault()
-    validateFun(userDetails)
-    setValid(true)
-    let submit = validateFun(userDetails)
-    if (submit === true) {
-      console.log(submit);
-      let url = "http://127.12.22.32:8000/user/register"
-      Axios.post(url, userDetails)
+   let flag = validateFun(selectedUser)
+    console.log(flag);
+   if(flag === (true)) {
+      let url = `http://127.12.22.32:8000/user/${selectedId}`
+      Axios.put(url, selectedUser)
         .then((response) => {
           setSubmitted(true)
           alert("Register successfully completed...")
@@ -60,8 +54,8 @@ const EditForm = () => {
         .catch((err) => {
           console.log(err)
         })
-
-    }
+      }
+     
   }
   let validateFun = (value) => {
     let name = value.name
@@ -94,8 +88,8 @@ const EditForm = () => {
     if (mobile === "") {
       setMobileErr("please enter Mobile Number")
     }
-    else if (mobile.length !== 10) {
-      setMobileErr("please enter min 4 and max 10 character only")
+    else if (mobile.length > 10 || mobile.length < 10) {
+      setMobileErr("Enter 10 character only")
     }
     else if (mobile.length === 10) {
       setMobileErr("")
@@ -142,37 +136,33 @@ const EditForm = () => {
     else if (description.length >= 4) {
       setDescriptionErr("")
     }
-
-    if (image === "") {
-      setImageErr("Please select image")
-    }
-    else if (image.length >= 4) {
-      setImageErr("")
-    }
-
-    if (nameErr === "" && emailErr === "" && mobileErr === "" && passwordErr === "" && stateErr === "" && cityErr === "" && descriptionErr === "" && imageErr === "") {
+    if((nameErr===null||nameErr==="")&&(emailErr===null||emailErr==="")&&(mobileErr===null||mobileErr==="")&&(passwordErr===null||passwordErr==="")&&(stateErr===null||stateErr==="")&&(cityErr===null||cityErr==="")&&(descriptionErr===null||descriptionErr==="") ){
       return true
     }
   }
 
   let changeImage = (event) => {
     let imageFile = event.target.files[0]
-    console.log(event);
+    console.log(event)
     let reader = new FileReader()
     reader.readAsDataURL(imageFile)
     reader.addEventListener("load", () => {
       if (reader.result) {
-        setUserDetails({ ...userDetails, image: reader.result })
+        setSelectedUser({ ...selectedUser, image: reader.result })
       }
     })
   };
 
   return <>
+    
+
     <div className="container container1 mt-5">
       <div className="row">
         <div className="col-md-12 col-bg">
           <center><h2 className="h1">Registration Form</h2></center>
-          <form onSubmit={submitHandler}>
+          {
+            submitted? <Navigate to="/admin"/>:<>
+             <form onSubmit={submitHandler}>
             <div className="form-group">
               <input type="text" className="form-control" value={selectedUser.name} name="name" onChange={getData} placeholder='Name' />
               <h6 className="text-danger">{nameErr}</h6>
@@ -202,11 +192,14 @@ const EditForm = () => {
               <h6 className="text-danger">{descriptionErr}</h6>
             </div>
             <div className="form-group">
-              <input type="file" className="form-control"  name="image" onChange={changeImage} placeholder='Image' /><img src={selectedUser.image} alt="no pic"/>
-              <h6 className="text-danger">{imageErr}</h6>
+              <input type="file" className="form-control" name="image" onChange={changeImage} placeholder='Image' /><img src={selectedUser.image} height="50px" alt="no pic" />
+              {/* <h6 className="text-danger">{imageErr}</h6> */}
             </div>
             <input type="submit" value="Register" className='btn btn-success' />
           </form>
+            </>
+          }
+         
           <p className="">Already have a account ? <Link to="/login">Log in</Link></p>
         </div>
 

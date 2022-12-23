@@ -4,9 +4,7 @@ import { Navigate, useParams } from 'react-router-dom'
 import Axios from 'axios'
 import { useEffect } from 'react'
 const Edit = () => {
-      //let[selectedId,setSelectedId]=useState(useParams().id)
-     let selectedId =useParams().id
-
+  let selectedId =useParams().id
   let [selectedProduct, setSelectedProduct] = useState({
     name: "",
     image: "",
@@ -30,6 +28,7 @@ useEffect(()=>{
   let getData = (event) => {
     setSelectedProduct({ ...selectedProduct, [event.target.name]: event.target.value })
   };
+  
   let submitData = (e) => {
     e.preventDefault()
     let url = `http://localhost:3000/products/${selectedId}`

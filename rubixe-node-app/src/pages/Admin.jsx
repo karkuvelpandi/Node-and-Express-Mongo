@@ -7,7 +7,7 @@ const Admin = () => {
     let [users,setUsers]=useState([])
     useEffect(()=>{
          fetchData()
-    },[users])
+    },[])
     let fetchData=()=>{
         Axios.get("http://127.12.22.32:8000/user/")
         .then((response)=>{

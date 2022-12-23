@@ -40,6 +40,7 @@ const RegForm = () => {
     e.preventDefault()
     setValid(true)
     let submit = validateFun(userDetails)
+    console.log(submit);
     if (submit === true) {
       console.log(submit);
       let url = "http://127.12.22.32:8000/user/register"
