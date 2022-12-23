@@ -88,7 +88,8 @@ const EditForm = () => {
     if (mobile === "") {
       setMobileErr("please enter Mobile Number")
     }
-    else if (mobile.length > 10 || mobile.length < 10) {
+    else if (mobile.length != 10 ) {
+      console.log(mobile.length);
       setMobileErr("Enter 10 character only")
     }
     else if (mobile.length === 10) {
@@ -155,7 +156,7 @@ const EditForm = () => {
 
   return <>
     
-
+<pre>{JSON.stringify(selectedUser)}</pre>
     <div className="container container1 mt-5">
       <div className="row">
         <div className="col-md-12 col-bg">
