@@ -1,29 +1,30 @@
 import { useState } from "react"
 import React from 'react'
 import { useEffect } from "react"
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import './RegForm.css'
+import Axios from 'axios'
 const RegForm = () => {
-{/* name,mobile,email,password,state,city,description,image */}
-let [nameErr, setNameErr] = useState(null)
-let [emailErr, setEmailErr] = useState(null)
+  {/* name,mobile,email,password,state,city,description,image */ }
+  let [nameErr, setNameErr] = useState(null)
+  let [emailErr, setEmailErr] = useState(null)
   let [mobileErr, setMobileErr] = useState(null)
   let [passwordErr, setPasswordErr] = useState(null)
   let [stateErr, setStateErr] = useState(null)
-  let [cityErr,setCityErr]=useState(null)
-  let [descriptionErr,setDescriptionErr]=useState(null)
-  let [imageErr,setImageErr]=useState(null)
+  let [cityErr, setCityErr] = useState(null)
+  let [descriptionErr, setDescriptionErr] = useState(null)
+  let [imageErr, setImageErr] = useState(null)
   let [valid, setValid] = useState(false)
-
+  let [submitted, setSubmitted] = useState(false)
   let [userDetails, setUserDetails] = useState({
     name: "",
     email: "",
     mobile: "",
     password: "",
     state: "",
-    city:"",
-    description:"",
-    image:"",
+    city: "",
+    description: "",
+    image: "",
   })
 
   let getData = (event) => {
@@ -41,7 +42,16 @@ let [emailErr, setEmailErr] = useState(null)
     setValid(true)
     let submit = validateFun(userDetails)
     if (submit === true) {
-      alert("Form submitted successfully")
+      console.log(submit);
+      let url = "http://127.12.22.32:8000/user/register"
+      Axios.post(url, userDetails)
+        .then((response) => {
+          setSubmitted(true)
+          alert("Register successfully completed...")
+        })
+        .catch((err) => {
+          console.log(err)
+        })
 
     }
   }
@@ -51,9 +61,9 @@ let [emailErr, setEmailErr] = useState(null)
     let mobile = value.mobile
     let password = value.password
     let state = value.state
-    let city=value.city
-    let description=value.description
-    let image=value.image
+    let city = value.city
+    let description = value.description
+    let image = value.image
 
     if (name === "") {
       setNameErr("please enter name")
@@ -100,39 +110,39 @@ let [emailErr, setEmailErr] = useState(null)
     if (state === "") {
       setStateErr("please enter State")
     }
-    else if (state.length <4) {
+    else if (state.length < 4) {
       setStateErr("please enter min 4 character")
     }
-    else if (state.length <= 4 ) {
+    else if (state.length >= 4) {
       setStateErr("")
     }
     if (city === "") {
       setCityErr("please enter City")
     }
-    else if (city.length <4) {
+    else if (city.length < 4) {
       setCityErr("please enter min 4 character")
     }
-    else if (city.length <=4) {
+    else if (city.length >= 4) {
       setCityErr("")
     }
     if (description === "") {
       setDescriptionErr("please enter Description")
     }
-    else if (description.length <4) {
+    else if (description.length < 4) {
       setDescriptionErr("please enter min 4 character")
     }
-    else if (description.length <=4) {
+    else if (description.length >= 4) {
       setDescriptionErr("")
     }
-    
-    if(image===""){
+
+    if (image === "") {
       setImageErr("Please select image")
     }
-    else if (image !==""){
+    else if (image.length >= 4) {
       setImageErr("")
     }
 
-    if (nameErr === ""&&emailErr === ""&&mobileErr === "" &&passwordErr === "" &&stateErr==="" &&cityErr==="" &&descriptionErr===""&&imageErr==="") {
+    if (nameErr === "" && emailErr === "" && mobileErr === "" && passwordErr === "" && stateErr === "" && cityErr === "" && descriptionErr === "" && imageErr === "") {
       return true
     }
 
@@ -152,6 +162,7 @@ let [emailErr, setEmailErr] = useState(null)
 
   return <>
 
+    <pre>{JSON.stringify(userDetails)}</pre>
     <div className="container container1 mt-5">
       <div className="row">
         <div className="col-md-12 col-bg">
@@ -186,14 +197,14 @@ let [emailErr, setEmailErr] = useState(null)
               <h6 className="text-danger">{descriptionErr}</h6>
             </div>
             <div className="form-group">
-              <input   type="text" className="form-control" name="image" onChange={changeImage} placeholder='Image' />
+              <input type="file" className="form-control" name="image" onChange={changeImage} placeholder='Image' />
               <h6 className="text-danger">{imageErr}</h6>
             </div>
             <input type="submit" value="Register" className='btn btn-success' />
           </form>
           <p className="">Already have a account ? <Link to="/login">Log in</Link></p>
         </div>
-        
+
       </div>
     </div>
   </>
