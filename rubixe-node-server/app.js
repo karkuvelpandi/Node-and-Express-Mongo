@@ -19,7 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({extended:false}))
 //connecting mongoDB
 mongoose.set('strictQuery', false);
-mongoose.connect(mongo_url).then((response)=>{
+mongoose.connect(mongo_url,{}).then((response)=>{
       console.log('MongoDB connected successfully...');
 })
 .catch((err)=>{

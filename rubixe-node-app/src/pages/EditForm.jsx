@@ -49,7 +49,7 @@ const EditForm = () => {
       Axios.put(url, selectedUser)
         .then((response) => {
           setSubmitted(true)
-          alert("Register successfully completed...")
+          alert("Profile successfully Updated...")
         })
         .catch((err) => {
           console.log(err)
@@ -160,7 +160,7 @@ const EditForm = () => {
     <div className="container container1 mt-5">
       <div className="row">
         <div className="col-md-12 col-bg">
-          <center><h2 className="h1">Registration Form</h2></center>
+          <center><h2 className="h1">Update Profile</h2></center>
           {
             submitted? <Navigate to="/admin"/>:<>
              <form onSubmit={submitHandler}>

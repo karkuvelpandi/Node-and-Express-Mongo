@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import "./LogIn.css"
+import Axios from 'axios'
 const LogIn = () => {
   let [emailErr, setEmailErr] = useState(null)
   let [passwordErr, SetPasswordErr] = useState(null)
@@ -26,8 +27,13 @@ const LogIn = () => {
     setValid(true)
     let submit = validateFun(userDetails)
     if (submit === true) {
-      alert("Form submitted successfully")
-
+      let url="http://127.12.22.32:8000/user/login"
+   Axios.post(url,userDetails).then((resp)=>{
+    alert("Form submitted successfully")
+   })
+   .catch((err)=>{
+      console.log(err)
+   })
     }
   }
   let validateFun = (value) => {
