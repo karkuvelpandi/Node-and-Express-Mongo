@@ -2,14 +2,17 @@ import { useState } from "react"
 import React from 'react'
 import { useEffect } from "react"
 import {Link} from 'react-router-dom'
-
+import './RegForm.css'
 const RegForm = () => {
-
-  let [emailErr, setEmailErr] = useState(null)
-  let [nameErr, SetNameErr] = useState(null)
-  let [mobileErr, SetMobileErr] = useState(null)
-  let [passwordErr, SetPasswordErr] = useState(null)
-  let [conformPasswordErr, SetConformPasswordErr] = useState(null)
+{/* name,mobile,email,password,state,city,description,image */}
+let [nameErr, setNameErr] = useState(null)
+let [emailErr, setEmailErr] = useState(null)
+  let [mobileErr, setMobileErr] = useState(null)
+  let [passwordErr, setPasswordErr] = useState(null)
+  let [stateErr, setStateErr] = useState(null)
+  let [cityErr,setCityErr]=useState(null)
+  let [descriptionErr,setDescriptionErr]=useState(null)
+  let [imageErr,setImageErr]=useState(null)
   let [valid, setValid] = useState(false)
 
   let [userDetails, setUserDetails] = useState({
@@ -17,7 +20,10 @@ const RegForm = () => {
     email: "",
     mobile: "",
     password: "",
-    conformPassword: ""
+    state: "",
+    city:"",
+    description:"",
+    image:"",
   })
 
   let getData = (event) => {
@@ -44,16 +50,19 @@ const RegForm = () => {
     let email = value.email
     let mobile = value.mobile
     let password = value.password
-    let conformPassword = value.conformPassword
+    let state = value.state
+    let city=value.city
+    let description=value.description
+    let image=value.image
 
     if (name === "") {
-      SetNameErr("please enter name")
+      setNameErr("please enter name")
     }
     else if (name.length <= 4 || name.length >= 15) {
-      SetNameErr("please enter min 4 and max 10 character only")
+      setNameErr("please enter min 4 and max 10 character only")
     }
     else if (name.length >= 4 || name.length <= 15) {
-      SetNameErr("")
+      setNameErr("")
     }
     if (email === "") {
       setEmailErr("please enter email")
@@ -65,51 +74,87 @@ const RegForm = () => {
       setEmailErr("")
     }
     if (mobile === "") {
-      SetMobileErr("please enter Mobile Number")
+      setMobileErr("please enter Mobile Number")
     }
     else if (mobile.length !== 10) {
-      SetMobileErr("please enter min 4 and max 10 character only")
+      setMobileErr("please enter min 4 and max 10 character only")
     }
     else if (mobile.length === 10) {
-      SetMobileErr("")
+      setMobileErr("")
     }
     if (!password) {
-      SetPasswordErr("Please enter password")
+      setPasswordErr("Please enter password")
     }
     if (!/^[A-Z]/.test(password)) {
-      SetPasswordErr("Must have atleast 1 capital letter")
+      setPasswordErr("Must have atleast 1 capital letter")
     }
     if (!/^(?=.*\d)/.test(password)) {
-      SetPasswordErr("Must have atleast 1 number ")
+      setPasswordErr("Must have atleast 1 number ")
     }
     else if (password.length < 4 || password.length > 10) {
-      SetPasswordErr("Password requird min 4 to 10 characters")
+      setPasswordErr("Password requird min 4 to 10 characters")
     }
     else {
-      SetPasswordErr("")
+      setPasswordErr("")
     }
-    if (!conformPassword) {
-      SetConformPasswordErr("Please enter password")
+    if (state === "") {
+      setStateErr("please enter State")
     }
-    else if (password !== conformPassword) {
-      SetConformPasswordErr("Password does't match")
+    else if (state.length <4) {
+      setStateErr("please enter min 4 character")
     }
-    else if (password === conformPassword) {
-      SetConformPasswordErr("")
+    else if (state.length <= 4 ) {
+      setStateErr("")
     }
-    if (nameErr === "" && emailErr === "" && mobileErr === "" && passwordErr === "" && conformPasswordErr === "") {
+    if (city === "") {
+      setCityErr("please enter City")
+    }
+    else if (city.length <4) {
+      setCityErr("please enter min 4 character")
+    }
+    else if (city.length <=4) {
+      setCityErr("")
+    }
+    if (description === "") {
+      setDescriptionErr("please enter Description")
+    }
+    else if (description.length <4) {
+      setDescriptionErr("please enter min 4 character")
+    }
+    else if (description.length <=4) {
+      setDescriptionErr("")
+    }
+    
+    if(image===""){
+      setImageErr("Please select image")
+    }
+    else if (image !==""){
+      setImageErr("")
+    }
+
+    if (nameErr === ""&&emailErr === ""&&mobileErr === "" &&passwordErr === "" &&stateErr==="" &&cityErr==="" &&descriptionErr===""&&imageErr==="") {
       return true
     }
 
   }
 
-
+  let changeImage = (event) => {
+    let imageFile = event.target.files[0]
+    console.log(event);
+    let reader = new FileReader()
+    reader.readAsDataURL(imageFile)
+    reader.addEventListener("load", () => {
+      if (reader.result) {
+        setUserDetails({ ...userDetails, image: reader.result })
+      }
+    })
+  };
 
   return <>
 
-    <div className="container">
+    <div className="container container1 mt-5">
       <div className="row">
-        <div className="col-md-12">
+        <div className="col-md-12 col-bg">
           <center><h2 className="h1">Registration Form</h2></center>
           <form onSubmit={submitHandler}>
             <div className="form-group">
@@ -129,13 +174,26 @@ const RegForm = () => {
               <h6 className="text-danger">{passwordErr}</h6>
             </div>
             <div className="form-group">
-              <input type="password" autoComplete="true" className="form-control" name="conformPassword" onChange={getData} placeholder='Conform-Password' />
-              <h6 className="text-danger">{conformPasswordErr}</h6>
+              <input type="text" className="form-control" name="state" onChange={getData} placeholder='State' />
+              <h6 className="text-danger">{stateErr}</h6>
+            </div>
+            <div className="form-group">
+              <input type="text" className="form-control" name="city" onChange={getData} placeholder='City' />
+              <h6 className="text-danger">{cityErr}</h6>
+            </div>
+            <div className="form-group">
+              <textarea className="form-control" name="description" onChange={getData} placeholder='Description' />
+              <h6 className="text-danger">{descriptionErr}</h6>
+            </div>
+            <div className="form-group">
+              <input   type="text" className="form-control" name="image" onChange={changeImage} placeholder='Image' />
+              <h6 className="text-danger">{imageErr}</h6>
             </div>
             <input type="submit" value="Register" className='btn btn-success' />
           </form>
-          <h4>Already have a account ? <Link to="/login">Log in</Link></h4>
+          <p className="">Already have a account ? <Link to="/login">Log in</Link></p>
         </div>
+        
       </div>
     </div>
   </>
