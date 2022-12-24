@@ -86,6 +86,7 @@ const LogIn = () => {
       <div className="row">
         <div className="col-md-12 bg-1">
           <center><h2 className="h1">Log in Form</h2></center>
+          <center><h5 style={{color:'blue'}}>Log in to view Admin Table</h5></center>
           {
             submitted ? <Navigate to="/admin" /> : <>
               <form onSubmit={submitHandler}>
