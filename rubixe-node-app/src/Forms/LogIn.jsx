@@ -31,8 +31,10 @@ const LogIn = () => {
       Axios.post(url, userDetails).then((resp) => {
         setSubmitted(true)
         console.log(resp.data);
+       
         alert(resp.data.result)
         let token = resp.data.token
+        localStorage.setItem("token", token)
 
       })
         .catch((error) => {
@@ -68,8 +70,11 @@ const LogIn = () => {
     }
     else {
       SetPasswordErr("")
+  
     }
-
+    if((passwordErr===null||passwordErr==="")&&(emailErr===null||emailErr==="")){
+      setEmailErr("") && SetPasswordErr("")
+    }
     if (emailErr === "" && passwordErr === "") {
       return true
     }

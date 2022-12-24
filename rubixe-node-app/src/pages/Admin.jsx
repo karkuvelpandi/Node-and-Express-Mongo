@@ -61,8 +61,8 @@ const Admin = () => {
                                       <td>{user.description}</td> */}
                                       <td><img src={user.image} height="70px" alt="" /></td>
                                       <td>
-                                        <Link to={`/edit/${user._id}`}>Edit</Link>
-                                        <Link onClick={deleteHandler.bind(this,user._id)}>Delete</Link>
+                                        <Link to={`/edit/${user._id}`} className="btn btn-success">Edit</Link>
+                                        <Link onClick={deleteHandler.bind(this,user._id)} className="btn btn-warning">Delete</Link>
                                       </td>
                                   </tr>
                                 })
