@@ -27,7 +27,7 @@ const LogIn = () => {
     setValid(true)
     let submit = validateFun(userDetails)
     if (submit === true) {
-      let url="http://127.12.22.32:8000/user/login"
+      let url="http://localhost:8000/user/login"
    Axios.post(url,userDetails).then((resp)=>{
     alert("Form submitted successfully")
    })

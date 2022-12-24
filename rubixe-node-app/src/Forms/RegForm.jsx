@@ -1,7 +1,7 @@
 import { useState } from "react"
 import React from 'react'
 import { useEffect } from "react"
-import { Link } from 'react-router-dom'
+import { Link,Navigate } from 'react-router-dom'
 import './RegForm.css'
 import Axios from 'axios'
 const RegForm = () => {
@@ -40,10 +40,9 @@ const RegForm = () => {
     e.preventDefault()
     setValid(true)
     let submit = validateFun(userDetails)
-    console.log(submit);
     if (submit === true) {
       console.log(submit);
-      let url = "http://127.12.22.32:8000/user/register"
+      let url = "http://localhost:8000/user/register"
       Axios.post(url, userDetails)
         .then((response) => {
           setSubmitted(true)
@@ -164,7 +163,9 @@ const RegForm = () => {
       <div className="row">
         <div className="col-md-12 col-bg">
           <center><h2 className="h1">Registration Form</h2></center>
-          <form onSubmit={submitHandler}>
+          {
+            submitted?<Navigate to="/login"/>:<>
+            <form onSubmit={submitHandler}>
             <div className="form-group">
               <input type="text" className="form-control" name="name" onChange={getData} placeholder='Name' />
               <h6 className="text-danger">{nameErr}</h6>
@@ -199,6 +200,9 @@ const RegForm = () => {
             </div>
             <input type="submit" value="Register" className='btn btn-success' />
           </form>
+            </>
+          }
+          
           <p className="">Already have a account ? <Link to="/login">Log in</Link></p>
         </div>
 

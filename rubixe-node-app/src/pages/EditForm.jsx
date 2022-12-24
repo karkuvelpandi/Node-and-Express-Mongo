@@ -45,7 +45,7 @@ const EditForm = () => {
    let flag = validateFun(selectedUser)
     console.log(flag);
    if(flag === (true)) {
-      let url = `http://127.12.22.32:8000/user/${selectedId}`
+      let url = `http://localhost:8000/user/${selectedId}`
       Axios.put(url, selectedUser)
         .then((response) => {
           setSubmitted(true)
@@ -98,15 +98,15 @@ const EditForm = () => {
     if (!password) {
       setPasswordErr("Please enter password")
     }
-    if (!/^[A-Z]/.test(password)) {
-      setPasswordErr("Must have atleast 1 capital letter")
-    }
-    if (!/^(?=.*\d)/.test(password)) {
-      setPasswordErr("Must have atleast 1 number ")
-    }
-    else if (password.length < 4 || password.length > 10) {
-      setPasswordErr("Password requird min 4 to 10 characters")
-    }
+    // if (!/^[A-Z]/.test(password)) {
+    //   setPasswordErr("Must have atleast 1 capital letter")
+    // }
+    // if (!/^(?=.*\d)/.test(password)) {
+    //   setPasswordErr("Must have atleast 1 number ")
+    // }
+    // else if (password.length < 4 || password.length > 10) {
+    //   setPasswordErr("Password requird min 4 to 10 characters")
+    // }
     else {
       setPasswordErr("")
     }
@@ -137,7 +137,7 @@ const EditForm = () => {
     else if (description.length >= 4) {
       setDescriptionErr("")
     }
-    if((nameErr===null||nameErr==="")&&(emailErr===null||emailErr==="")&&(mobileErr===null||mobileErr==="")&&(passwordErr===null||passwordErr==="")&&(stateErr===null||stateErr==="")&&(cityErr===null||cityErr==="")&&(descriptionErr===null||descriptionErr==="") ){
+    if((nameErr===null||nameErr==="")&&(emailErr===null||emailErr==="")&&(mobileErr===null||mobileErr==="")&&(stateErr===null||stateErr==="")&&(cityErr===null||cityErr==="")&&(descriptionErr===null||descriptionErr==="") ){
       return true
     }
   }
@@ -176,10 +176,10 @@ const EditForm = () => {
               <input type="number" className="form-control" value={selectedUser.mobile} name="mobile" onChange={getData} placeholder='Mobile-Number' />
               <h6 className="text-danger">{mobileErr}</h6>
             </div>
-            <div className="form-group">
+            {/* <div className="form-group">
               <input type="password" autoComplete="true" value={selectedUser.password} className="form-control" name="password" onChange={getData} placeholder='Password' />
               <h6 className="text-danger">{passwordErr}</h6>
-            </div>
+            </div> */}
             <div className="form-group">
               <input type="text" className="form-control" value={selectedUser.state} name="state" onChange={getData} placeholder='State' />
               <h6 className="text-danger">{stateErr}</h6>

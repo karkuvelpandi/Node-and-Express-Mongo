@@ -1,12 +1,12 @@
 import express from 'express'
 import User from '../model/User.js'
-// import Login from '../model/Login.js'
-import authenticate from"../middleware/authenticate.js";
+import Login from '../model/Login.js'
+import authenticate from"../middleware/authenticate";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-// import { check, validationResult } from"express-validator";
+import { check, validationResult } from"express-validator";
 import dotenv from 'dotenv'
-dotenv.config({ path: "../config/config.env" });
+dotEnv.config({ path: "./config/config.env" });
 const router = express.Router()
 //get all users
 /*
@@ -37,16 +37,13 @@ router.post('/register', async (req, resp) => {
          description: req.body.description,
          image: req.body.image
       }
-      let salt = await bcrypt.genSalt(10);
-      let password = await bcrypt.hash(new_user.password, salt);
-     console.log(password);
       let user = await User.findOne({ email: new_user.email })
       if (user) {
          resp.status(200).json({
             msg: 'User already exist...'
          })
       }
-      let createUser = await User({...new_user,password})
+      let createUser = await User(new_user)
       let saveUser = await createUser.save()
       resp.status(200).json({
          result: "User Register Successfully...",
@@ -54,7 +51,7 @@ router.post('/register', async (req, resp) => {
       })
 
    }
-   catch (err) {console.log(err); }
+   catch (err) { }
 
 })
 // Updating user data
@@ -129,51 +126,33 @@ router.get('/:id', async (req, resp) => {
 })
 
 //get and compare the user login with JWT
-/*
-URL   : http://127.12.22.32:8000/user/login
-Method: POST
-fields:email, password
-*/
-
 router.post('/login', async (req, resp) => {
    try {
-      let loginUser = {
+      let loginData = {
          email: req.body.email,
          password: req.body.password
       }
-// checking user is already exist or not 
-
-      let existUser = await User.findOne({ email: loginUser.email })
-      console.log(existUser);
+      let existUser = await User.findOne({ email: loginData.email })
       if (!existUser) {
-        return resp.status(200).json({
-            msg: "User with this email is not exist"
+         resp.status(200).json({
+            msg: "User with this email is not available"
          })
       }
-     console.log(existUser.password);
-     //bcrypt compare password
-      let isMatch = await bcrypt.compare(loginUser.password, existUser.password);
-       console.log(isMatch);
-     
-       if(!isMatch){
-         return resp.status(401).json({
-            msg:"Invalid Credentials - Password not match"
+      else {
+         let createUserlogin = await Login(loginData)
+         await localStorage.setItem('userLogin',createUserlogin)
+         // let saveUserlogin = await createUserlogin.save()
+         resp.status(200).json({
+            result: "User logged-in Successfully..."
+            // userLogin: saveUserlogin
          })
-       }
-
-       //createing JWT token
-       let payload = {
-           id: existUser.id,
-           email:existUser.email
-       };
-    jwt.sign(payload,process.env.JWT_SECRET_KEY,(err,token)=>{
-       if(err)throw err
-       resp.status(200).json({
-         result :'Login success',
-         token:token
-       })
-    })
+      }
    
+      
+
+
+
+
    }
    catch (err) { }
 })

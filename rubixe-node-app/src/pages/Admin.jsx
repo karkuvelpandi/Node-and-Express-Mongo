@@ -9,7 +9,7 @@ const Admin = () => {
          fetchData()
     },[])
     let fetchData=()=>{
-        Axios.get("http://127.12.22.32:8000/user/")
+        Axios.get("http://localhost:8000/user/")
         .then((response)=>{
             setUsers(response.data)
         })
@@ -19,7 +19,7 @@ const Admin = () => {
     }
 
     let deleteHandler=(userId)=>{
-        let url=`http://127.12.22.32:8000/user/${userId}`
+        let url=`http://localhost:8000/user/${userId}`
         Axios.delete(url)
         .then(()=>{
              console.log("User detail deleted successfully...");
@@ -30,10 +30,8 @@ const Admin = () => {
         })
     }
     return <>
-        <div className="container mt-5">
-            <div className="row">
-                <div className="col-md-12">
-                    <table className='table table-dark text-white text-center'>
+        
+                    <table className='table table-dark text-white text-center mt-5'>
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -45,12 +43,13 @@ const Admin = () => {
                                 <th>City</th>
                                 <th>Description</th>
                                 <th>Image</th>
+                                <th>Modify</th>
                             </tr>
                         </thead>
                         <tbody>
                              {
                                 users.map((user)=>{
-                                  return <tr key={user._id}>
+                                  return <tr key={user._id} style={{width:"500px"}}>
                                       <td>{(user._id).slice(20,24)}</td>
                                       <td>{user.name}</td>
                                       <td>{user.mobile}</td>
@@ -69,9 +68,6 @@ const Admin = () => {
                              }
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
     </>
 }
 

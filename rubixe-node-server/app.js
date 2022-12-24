@@ -8,7 +8,7 @@ const app=express()
 //config env
 dotenv.config({path:'./config/config.env'})
 const port=process.env.PORT
-const hostName=process.env.HOST_NAME
+// const hostName=process.env.HOST_NAME
 const mongo_url=process.env.MongoDB_URL
 //enable client access point CORS
 app.use(cors())
@@ -29,7 +29,7 @@ mongoose.connect(mongo_url,{}).then((response)=>{
 app.use('/user',userRouter)
 
 
-app.listen(port,hostName,(err)=>{
+app.listen(port,(err)=>{
     if(err)throw err
-     console.log(`server running successfully on http://${hostName}:${port}`);
+     console.log(`server running successfully on http://localhost:${port}`);
 })
