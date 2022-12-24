@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Navigate } from 'react-router-dom'
 import "./LogIn.css"
 import Axios from 'axios'
 const LogIn = () => {
   let [emailErr, setEmailErr] = useState(null)
   let [passwordErr, SetPasswordErr] = useState(null)
   let [valid, setValid] = useState(false)
-
+  let [submitted, setSubmitted] = useState(false)
   let [userDetails, setUserDetails] = useState({
     email: "",
     password: ""
@@ -27,17 +27,18 @@ const LogIn = () => {
     setValid(true)
     let submit = validateFun(userDetails)
     if (submit === true) {
-      let url="http://localhost:8000/user/login"
-   Axios.post(url,userDetails).then((resp)=>{
-    console.log(resp.data);
-    alert(resp.data.result)
-    let token=resp.data.token
-   
-   })
-   .catch((error)=>{
-      console.log(error.response.data)
-      setEmailErr(error.response.data.msg)
-   })
+      let url = "http://localhost:8000/user/login"
+      Axios.post(url, userDetails).then((resp) => {
+        setSubmitted(true)
+        console.log(resp.data);
+        alert(resp.data.result)
+        let token = resp.data.token
+
+      })
+        .catch((error) => {
+          console.log(error.response.data)
+          setEmailErr(error.response.data.msg)
+        })
     }
   }
   let validateFun = (value) => {
@@ -80,17 +81,22 @@ const LogIn = () => {
       <div className="row">
         <div className="col-md-12 bg-1">
           <center><h2 className="h1">Log in Form</h2></center>
-          <form onSubmit={submitHandler}>
-            <div className="form-group">
-              <input type="text" className="form-control" name="email" onChange={getData} placeholder='E-mail' />
-              <h6 className="text-danger">{emailErr}</h6>
-            </div>
-            <div className="form-group">
-              <input type="password" autoComplete="true" className="form-control" name="password" onChange={getData} placeholder='Password' />
-              <h6 className="text-danger">{passwordErr}</h6>
-            </div>
-            <input type="submit" value="Log In" className='btn btn-success' />
-          </form>
+          {
+            submitted ? <Navigate to="/admin" /> : <>
+              <form onSubmit={submitHandler}>
+                <div className="form-group">
+                  <input type="text" className="form-control" name="email" onChange={getData} placeholder='E-mail' />
+                  <h6 className="text-danger">{emailErr}</h6>
+                </div>
+                <div className="form-group">
+                  <input type="password" autoComplete="true" className="form-control" name="password" onChange={getData} placeholder='Password' />
+                  <h6 className="text-danger">{passwordErr}</h6>
+                </div>
+                <input type="submit" value="Log In" className='btn btn-success' />
+              </form>
+            </>
+          }
+
           &nbsp;&nbsp;&nbsp;<p>Didn't have a account ? <Link to="/">Register here</Link> </p>
         </div>
       </div><br />

@@ -1,6 +1,6 @@
 import express from 'express'
 import User from '../model/User.js'
-import authenticate from"../middleware/authenticate.js";
+import authenticate from "../middleware/authenticate.js";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
 import dotenv from 'dotenv'
@@ -12,7 +12,7 @@ URL            : http://127.12.22.32:8000/user/
 method         : GET
 required field : N/A
 */
-router.get('/',authenticate, async (req, resp) => {
+router.get('/', async (req, resp) => {
    let user = await User.find()
    resp.status(200).json(user)
 })
@@ -37,14 +37,14 @@ router.post('/register', async (req, resp) => {
       }
       let salt = await bcrypt.genSalt(10);
       let password = await bcrypt.hash(new_user.password, salt);
-     console.log(password);
+      console.log(password);
       let user = await User.findOne({ email: new_user.email })
       if (user) {
-         resp.status(200).json({
+         return resp.status(200).json({
             msg: 'User already exist...'
          })
       }
-      let createUser = await User({...new_user,password})
+      let createUser = await User({ ...new_user, password })
       let saveUser = await createUser.save()
       resp.status(200).json({
          result: "User Register Successfully...",
@@ -52,7 +52,7 @@ router.post('/register', async (req, resp) => {
       })
 
    }
-   catch (err) {console.log(err); }
+   catch (err) { console.log(err); }
 
 })
 // Updating user data
@@ -140,39 +140,39 @@ router.post('/login', async (req, resp) => {
          password: req.body.password
       }
 
-// checking user is already exist or not 
+      // checking user is already exist or not 
 
       let existUser = await User.findOne({ email: loginUser.email })
       console.log(existUser);
       if (!existUser) {
-        return resp.status(200).json({
+         return resp.status(200).json({
             msg: "User with this email is not exist"
          })
       }
-     console.log(existUser.password);
-     //bcrypt compare password
+      console.log(existUser.password);
+      //bcrypt compare password
       let isMatch = await bcrypt.compare(loginUser.password, existUser.password);
-       console.log(isMatch);
-     
-       if(!isMatch){
-         return resp.status(401).json({
-            msg:"Invalid Credentials - Password not match"
-         })
-       }
+      console.log(isMatch);
 
-       //createing JWT token
-       let payload = {
-           id: existUser.id,
-           email:existUser.email
-       };
-    jwt.sign(payload,process.env.JWT_SECRET_KEY,(err,token)=>{
-       if(err)throw err
-       resp.status(200).json({
-         result :'Login success',
-         token:token
-       })
-    })
-   
+      if (!isMatch) {
+         return resp.status(401).json({
+            msg: "Invalid Credentials - Password not match"
+         })
+      }
+
+      //createing JWT token
+      let payload = {
+         id: existUser.id,
+         email: existUser.email
+      };
+      jwt.sign(payload, process.env.JWT_SECRET_KEY, (err, token) => {
+         if (err) throw err
+         resp.status(200).json({
+            result: 'Login success',
+            token: token
+         })
+      })
+
    }
    catch (err) { }
 })
