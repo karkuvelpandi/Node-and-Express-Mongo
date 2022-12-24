@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Axios from 'axios'
 import {Link,} from 'react-router-dom'
-import './Admin.css'
+
 const UserAdmin = () => {
     let [users,setUsers]=useState([])
     useEffect(()=>{

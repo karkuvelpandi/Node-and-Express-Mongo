@@ -1,28 +1,5 @@
 export const MenuItems = {
-
-    services: [
-        {
-            title: 'Marketing',
-            path: '/marketing',
-            cName: 'dropdown-link'
-        },
-        {
-            title: 'Design',
-            path: '/design',
-            cName: 'dropdown-link'
-        },
-        {
-            title: 'Development',
-            path: '/development',
-            cName: 'dropdown-link'
-        },
-        {
-            title: 'Maintanence',
-            path: '/Maintanence',
-            cName: 'dropdown-link'
-        },
-    ],
-  products:[
+  product:[
     {
         title: 'Create Product',
         path: '/createProduct',
@@ -34,16 +11,27 @@ export const MenuItems = {
         cName: 'dropdown-link'
     },
     {
-        title: 'Development',
-        path: '/development',
+        title: 'Update Product',
+        path: '/updateProduct',
+        cName: 'dropdown-link'
+    },
+  ],
+user:[
+    {
+        title: 'Register Here',
+        path: '/regForm',
         cName: 'dropdown-link'
     },
     {
-        title: 'Maintanence',
-        path: '/Maintanence',
+        title: 'User Admin',
+        path: '/userAdmin',
         cName: 'dropdown-link'
     },
-  ]
-
+    {
+        title: 'Update Profile',
+        path: '/editForm',
+        cName: 'dropdown-link'
+    }
+]
 
 }
