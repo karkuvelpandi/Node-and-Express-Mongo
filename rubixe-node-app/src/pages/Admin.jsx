@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import Axios from 'axios'
 import {Link,} from 'react-router-dom'
+import './Admin.css'
 const Admin = () => {
     let [users,setUsers]=useState([])
     useEffect(()=>{
@@ -25,8 +26,8 @@ const Admin = () => {
              console.log("User detail deleted successfully...");
              fetchData()
         })
-        .catch((err)=>{
-             console.log(err)
+        .catch((error)=>{
+             console.log(error)
         })
     }
     return <>
@@ -39,9 +40,9 @@ const Admin = () => {
                                 <th>Mobile</th>
                                 <th>Email</th>
                                 <th>Password</th>
-                                <th>State</th>
+                                {/* <th>State</th>
                                 <th>City</th>
-                                <th>Description</th>
+                                <th>Description</th> */}
                                 <th>Image</th>
                                 <th>Modify</th>
                             </tr>
@@ -49,15 +50,15 @@ const Admin = () => {
                         <tbody>
                              {
                                 users.map((user)=>{
-                                  return <tr key={user._id} style={{width:"500px"}}>
-                                      <td>{(user._id).slice(20,24)}</td>
+                                  return <tr key={user._id}>
+                                      <td >{(user._id).slice(20,24)}</td>
                                       <td>{user.name}</td>
                                       <td>{user.mobile}</td>
                                       <td>{user.email}</td>
                                       <td>{user.password}</td>
-                                      <td>{user.state}</td>
+                                      {/* <td>{user.state}</td>
                                       <td>{user.city}</td>
-                                      <td>{user.description}</td>
+                                      <td>{user.description}</td> */}
                                       <td><img src={user.image} height="70px" alt="" /></td>
                                       <td>
                                         <Link to={`/edit/${user._id}`}>Edit</Link>

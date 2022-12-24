@@ -1,10 +1,8 @@
 import express from 'express'
 import User from '../model/User.js'
-// import Login from '../model/Login.js'
 import authenticate from"../middleware/authenticate.js";
 import jwt from 'jsonwebtoken'
 import bcrypt from 'bcrypt'
-// import { check, validationResult } from"express-validator";
 import dotenv from 'dotenv'
 dotenv.config({ path: "../config/config.env" });
 const router = express.Router()
@@ -14,7 +12,7 @@ URL            : http://127.12.22.32:8000/user/
 method         : GET
 required field : N/A
 */
-router.get('/', async (req, resp) => {
+router.get('/',authenticate, async (req, resp) => {
    let user = await User.find()
    resp.status(200).json(user)
 })
@@ -141,6 +139,7 @@ router.post('/login', async (req, resp) => {
          email: req.body.email,
          password: req.body.password
       }
+
 // checking user is already exist or not 
 
       let existUser = await User.findOne({ email: loginUser.email })

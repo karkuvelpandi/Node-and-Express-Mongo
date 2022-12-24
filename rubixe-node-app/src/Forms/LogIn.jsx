@@ -29,10 +29,14 @@ const LogIn = () => {
     if (submit === true) {
       let url="http://localhost:8000/user/login"
    Axios.post(url,userDetails).then((resp)=>{
-    alert("Form submitted successfully")
+    console.log(resp.data);
+    alert(resp.data.result)
+    let token=resp.data.token
+   
    })
-   .catch((err)=>{
-      console.log(err)
+   .catch((error)=>{
+      console.log(error.response.data)
+      setEmailErr(error.response.data.msg)
    })
     }
   }
