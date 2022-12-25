@@ -8,7 +8,7 @@ import cardImg5 from '../../../assets/card-5.png'
 const InitiativeCard = () => {
   return <>
     <div className="card-div">
-      <div><h1>TECH FOR TEENS -A RUBIXE @ INITIATIVE</h1></div>
+      <div><h1>TECH FOR TEENS -A EHUB @ INITIATIVE</h1></div>
       <div className='card-content'>
 
         <div className='card-1'>
