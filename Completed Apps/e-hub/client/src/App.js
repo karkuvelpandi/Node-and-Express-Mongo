@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './Navbar/Navbar'
-import Home from './Pages/HomePage/Home'
+// import Home from './Pages/HomePage/Home'
 import Products from './Pages/Products/Products'
 // import Service from './Pages/Service/Service'
 import Contact from './Pages/Contact/Contact'
@@ -19,7 +19,7 @@ const App = () => {
     < Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<Products />} />
         {/* <Route path='/service' element={<Service />} /> */}
         <Route path='/contact' element={<Contact />} />
 

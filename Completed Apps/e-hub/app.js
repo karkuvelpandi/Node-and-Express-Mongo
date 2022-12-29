@@ -4,6 +4,7 @@ import cors from 'cors'
 import mongoose from 'mongoose'
 import morgan from 'morgan'
 import userRouter from './router/userRouter.js'
+import productRouter from './router/productRouter.js'
 const app=express()
 //config env
 dotenv.config({path:'./config/config.env'})
@@ -25,7 +26,8 @@ mongoose.connect(mongo_url,{}).then((response)=>{
 .catch((err)=>{
     console.log(err);
 })
-
+//API router
+app.use('/product',productRouter)
 app.use('/user',userRouter)
 
 

@@ -34,24 +34,24 @@ const onMouseLeave=()=>{
    setDropdownUser(false)
 }
   return <>
-  <nav className={scrolled?"nav-fixer":"nav"}>
+  <nav className={scrolled?"nav-fixer":"nav-main"}>
     <div className='nav-left'>
     <Link to='/'><img src={homeLogo} className='homeLogo' alt="" /></Link>
     </div>
     <ul className='nav-right-list'>
-            <li className="nav-item" ><Link className='nav-link' to='/'>HOME</Link></li>
+            {/* <li className="nav-item-li" ><Link className='nav-link-li' to='/'>HOME</Link></li> */}
             {/* <li className="nav-item" >
             <Link className='nav-link' to="/service">SERVICES</Link>
             </li> */}
-            <li className="nav-item" onMouseOver={onMouseEnter.bind(this,"product")} onMouseLeave={onMouseLeave}>
-              <Link className='nav-link' to='/product'>PRODUCTS</Link>
+            <li className="nav-item-li" onMouseOver={onMouseEnter.bind(this,"product")} onMouseLeave={onMouseLeave}>
+              <Link className='nav-link-li' to='/product'>PRODUCTS</Link>
             {dropDownProduct ?<Dropdown dropdown={MenuItems.product}/>:null}
             </li>
-            <li className="nav-item" name="user" onMouseOver={onMouseEnter.bind(this,"user")} onMouseLeave={onMouseLeave}>
-              <Link className='nav-link' to='/userLogin'>LOG IN</Link>
+            <li className="nav-item-li" name="user" onMouseOver={onMouseEnter.bind(this,"user")} onMouseLeave={onMouseLeave}>
+              <Link className='nav-link-li' to='/userLogin'>LOG IN</Link>
               {dropDownUser ?<Dropdown dropdown={MenuItems.user}/>:null}
             </li>
-            <li className="nav-item" ><Link className='nav-link' to="/contact">CONTACT US</Link></li>
+            <li className="nav-item-li" ><Link className='nav-link-li' to="/contact">CONTACT US</Link></li>
             {/* <li><Link className='nav-link'>CAREER</Link></li>
             <li><Link className='nav-link'>BLOG</Link></li>
             <li><Link className='nav-link'>ABOUT</Link></li> */}

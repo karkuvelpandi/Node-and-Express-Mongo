@@ -15,7 +15,7 @@ const Products = () => {
   }, [])
 
   return <>
-    <div className="container mt-5">
+    <div className="container">
       <pre>{JSON.stringify(products)}</pre>
       <div className="row">
         {
