@@ -10,8 +10,7 @@
     flex-direction: row;
     justify-content: space-between;
     position: fixed;
-    transition-delay: 0.2s;
-
+    top: 0px;
     z-index: 2;
     width: 100%;
 }

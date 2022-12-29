@@ -40,9 +40,9 @@ const onMouseLeave=()=>{
     </div>
     <ul className='nav-right-list'>
             <li className="nav-item" ><Link className='nav-link' to='/'>HOME</Link></li>
-            <li className="nav-item" >
+            {/* <li className="nav-item" >
             <Link className='nav-link' to="/service">SERVICES</Link>
-            </li>
+            </li> */}
             <li className="nav-item" onMouseOver={onMouseEnter.bind(this,"product")} onMouseLeave={onMouseLeave}>
               <Link className='nav-link' to='/product'>PRODUCTS</Link>
             {dropDownProduct ?<Dropdown dropdown={MenuItems.product}/>:null}
