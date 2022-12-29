@@ -27,7 +27,9 @@ mongoose.connect(mongo_url).then((response)=>{
     console.log(err);
 })
 //API router
-
+app.get('/',(req,resp)=>{
+       resp.send("<h1>e-Hub server running successfully......</h1>")
+})
 app.use('/user',userRouter)
 app.use('/product',productRouter)
 

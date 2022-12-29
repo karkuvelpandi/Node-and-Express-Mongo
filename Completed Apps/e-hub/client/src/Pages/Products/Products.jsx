@@ -2,7 +2,7 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import Axios from 'axios'
-
+import Footer from '../../Footer/Footer'
 const Products = () => {
 
   let [products, setProducts] = useState([])
@@ -14,8 +14,8 @@ const Products = () => {
     }).catch((er) => { setErr(er) })
   }, [])
 
-  return <>
-    <div className="container">
+  return <> 
+    <div className="container" style={{minHeight:"50vh"}}>
       <pre>{JSON.stringify(products)}</pre>
       <div className="row">
         {
@@ -41,6 +41,7 @@ const Products = () => {
         }
       </div>
     </div>
+    <Footer/>
   </>
 }
 

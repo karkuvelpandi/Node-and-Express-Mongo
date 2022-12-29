@@ -39,7 +39,7 @@ const onMouseLeave=()=>{
     <Link to='/'><img src={homeLogo} className='homeLogo' alt="" /></Link>
     </div>
     <ul className='nav-right-list'>
-            {/* <li className="nav-item-li" ><Link className='nav-link-li' to='/'>HOME</Link></li> */}
+            <li className="nav-item-li" ><Link className='nav-link-li' to='/'>HOME</Link></li>
             {/* <li className="nav-item" >
             <Link className='nav-link' to="/service">SERVICES</Link>
             </li> */}

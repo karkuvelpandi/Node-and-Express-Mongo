@@ -13,7 +13,6 @@ const CreateProduct = () => {
     })
     let [submitted, setSubmitted] = useState(false)
     
-
     let productData = (event) => {
         setProduct({
             ...product,
@@ -21,11 +20,9 @@ const CreateProduct = () => {
         })
     }
 
-
     let submitHandler = (event) => {
         event.preventDefault();
         let url ="http://127.12.22.32:8000/product/" 
-        setSubmitted(true)
         Axios.post(url, product).then((res) => {
             setSubmitted(true)
         }).catch(() => { }) 
@@ -53,7 +50,6 @@ const CreateProduct = () => {
         <div className="container mt-5">
             <pre>{JSON.stringify(product)}</pre>
             <pre>{JSON.stringify(submitted)}</pre>
-           {/* <Admin method={editHandler}/> */}
             {
                 submitted ? <><Navigate to='/product' /></> : <>
                     <div className="row">

@@ -1,16 +1,12 @@
 import React from 'react'
-import InitiativeCard from './InitiativeCard/InitiativeCard'
 import Header from './Header/Header'
-import WhoWe from './WhoWe/WhoWe'
-import History from './History/History'
-import Footer from '../../Footer/Footer'
+import Products from '../Products/Products'
+
 const Home = () => {
   return <>
     <Header/>
-    <WhoWe/>
-    <History/>
-    <InitiativeCard/>
-    <Footer/>
+   <Products/>
+   
   </>
 }
 

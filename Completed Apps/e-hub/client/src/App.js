@@ -2,7 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import './App.css'
 import Navbar from './Navbar/Navbar'
-// import Home from './Pages/HomePage/Home'
+import Home from './Pages/HomePage/Home'
 import Products from './Pages/Products/Products'
 // import Service from './Pages/Service/Service'
 import Contact from './Pages/Contact/Contact'
@@ -19,7 +19,7 @@ const App = () => {
     < Router>
       <Navbar />
       <Routes>
-        <Route path='/' element={<Products />} />
+        <Route path='/' element={<Home />} />
         {/* <Route path='/service' element={<Service />} /> */}
         <Route path='/contact' element={<Contact />} />
 
@@ -31,7 +31,7 @@ const App = () => {
         <Route path='/userLogin' element={<LogIn/>} />
         <Route path='/regForm' element={<RegForm />} />
         <Route path='/userAdmin' element={<UserAdmin />} />
-        <Route path='/editForm' element={<EditForm />} />
+        <Route path='/editForm/:id' element={<EditForm />} />
       </Routes>
 
     </Router>
