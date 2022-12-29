@@ -164,7 +164,7 @@ const RegForm = () => {
         <div className="col-md-12 col-bg">
           <center><h2 className="h1">Registration Form</h2></center>
           {
-            submitted?<Navigate to="/login"/>:<>
+            submitted?<Navigate to="/userLogin"/>:<>
             <form onSubmit={submitHandler}>
             <div className="form-group">
               <input type="text" className="form-control" name="name" onChange={getData} placeholder='Name' />

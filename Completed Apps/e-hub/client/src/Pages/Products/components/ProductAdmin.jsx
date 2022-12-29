@@ -10,14 +10,14 @@ const ProductAdmin = () => {
    let[errorMsg,setErrorMsg]=useState("")
 
   useEffect(() => {
-    Axios.get("http://127.0.0.1:5000/api/products").then((res) => {
+    Axios.get("http://127.12.22.32:8000/product/").then((res) => {
       setProducts(res.data)
     }).catch((err) => { setErrorMsg(err)})
   }, [])
 
   
   let deleteProduct = (id) => {
-    Axios.delete(`http://127.0.0.1:5000/api/products/${id}`)
+    Axios.delete(`http://127.12.22.32:8000/product/${id}`)
       .then((resp) => {
         navigate(0)
       }).catch((err) => { setErrorMsg(err)})

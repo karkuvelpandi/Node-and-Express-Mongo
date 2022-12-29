@@ -19,7 +19,7 @@ let [errorMsg,setErrorMsg]=useState("")
    setProductId(id)
    }; 
     useEffect(() => {
-        let url = `http://127.0.0.1:5000/api/products/${productID}`
+        let url = `http://127.12.22.32:8000/product/${productID}`
        Axios.get(url).then((response)=>{
           setSelectedProduct(response.data)
        }).catch((err)=>{setErrorMsg(err)})
@@ -50,7 +50,7 @@ let [errorMsg,setErrorMsg]=useState("")
 
 let submitHandler = (event) => {
         event.preventDefault();
-        let dataURL = `http://127.0.0.1:5000/api/products/${productID}`
+        let dataURL = `http://127.12.22.32:8000/product/${productID}`
         Axios.put(dataURL,selectedproduct).then((res) => {
         
             setSubmitted(true)

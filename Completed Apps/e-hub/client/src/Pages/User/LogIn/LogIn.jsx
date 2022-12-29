@@ -88,7 +88,7 @@ const LogIn = () => {
           <center><h2 className="h1">Log in Form</h2></center>
           <center><h5 style={{color:'blue'}}>Log in to view Admin Table</h5></center>
           {
-            submitted ? <Navigate to="/admin" /> : <>
+            submitted ? <Navigate to="/userAdmin" /> : <>
               <form onSubmit={submitHandler}>
                 <div className="form-group">
                   <input type="text" className="form-control" name="email" onChange={getData} placeholder='E-mail' />

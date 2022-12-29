@@ -24,7 +24,7 @@ const CreateProduct = () => {
 
     let submitHandler = (event) => {
         event.preventDefault();
-        let url ="http://127.0.0.1:5000/api/products" 
+        let url ="http://127.12.22.32:8000/product/" 
         setSubmitted(true)
         Axios.post(url, product).then((res) => {
             setSubmitted(true)
@@ -55,7 +55,7 @@ const CreateProduct = () => {
             <pre>{JSON.stringify(submitted)}</pre>
            {/* <Admin method={editHandler}/> */}
             {
-                submitted ? <><Navigate to='/ListProducts' /></> : <>
+                submitted ? <><Navigate to='/product' /></> : <>
                     <div className="row">
                         <div className="col-md-5">
                             <div className="card">

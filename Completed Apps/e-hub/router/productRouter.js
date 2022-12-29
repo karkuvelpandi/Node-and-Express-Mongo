@@ -4,7 +4,7 @@ import Product from '../model/Product.js'
 let router=express.Router()
 //Get all products
 /*
-URL           : http://127.12.31.16:6000/product/
+URL           : http://127.12.22.32:8000/product/
 method        : GET
 Require fields: N/A
 */
@@ -15,7 +15,7 @@ router.get('/',async(req,resp)=>{
 
 //Get single product
 /*
-URL           : http://127.12.31.16:6000/product/:id
+URL           : http://127.12.22.32:8000/product/:id
 method        : GET
 Require fields: N/A
 */
@@ -35,7 +35,7 @@ router.get('/:id',async (req,resp)=>{
 
 //Create Products
 /*
-URL           : http://127.12.31.16:6000/product/
+URL           : http://127.12.22.32:8000/product/
 method        : POST
 Require fields: name,image,price,qty,info
 */
@@ -66,7 +66,7 @@ router.post('/create',async(req,resp)=>{
 
 //Update Products
 /*
-URL           : http://127.12.31.16:6000/product/:id
+URL           : http://127.12.22.32:8000/product/:id
 method        : PUT
 Require fields: name,image,price,qty,info
 */
@@ -95,7 +95,7 @@ router.put("/:id",async(req,resp)=>{
 
 //Delete Products
 /*
-URL           : http://127.12.31.16:6000/product/:id
+URL           : http://127.12.22.32:8000/product/:id
 method        : DELETE
 Require fields: N/A
 */
