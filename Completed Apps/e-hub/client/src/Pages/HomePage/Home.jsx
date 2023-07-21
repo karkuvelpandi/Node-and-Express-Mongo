@@ -4,9 +4,8 @@ import Products from '../Products/Products'
 
 const Home = () => {
   return <>
-    <Header/>
-   <Products/>
-   
+    <Header />
+    <Products />
   </>
 }
 
