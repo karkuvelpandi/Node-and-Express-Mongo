@@ -9,10 +9,11 @@ server.use(middlewares);
 server.use(
   jsonServer.rewriter({
     "/api/*": "/$1",
+    "/blog/:resource/:id/show": "/:resource/:id",
   })
 );
 server.use(router);
-server.listen(3000, () => {
+server.listen(5000, () => {
   console.log("JSON Server is running");
 });
 
